@@ -1,16 +1,20 @@
+
+# REQUIREMENTS : 
+
+- Deployment on Aurora testnet(https://explorer.testnet.aurora.dev/) & Mantle testnet (https://docs.mantle.xyz/network/tools-and-sdk/network-faucet) , having both options of choosing which testnet be used in the hosted link
+
+- Implement Account Abstraction (https://github.com/eth-infinitism/account-abstraction)
+
+- Host using Netlify or Vercel
+
 # About
 
-![](./docs/choose-screen.png)
 
-Turn-based fantasy campaign game powered by Chainlink VRF and user imagination, built for the [Fall 2021 Chainlink Hackathon](https://chain.link/hackathon) in far less time than we should have allowed for! Uses zkSNARKs to validate that the user has completed the maze.
+Turn-based fantasy campaign game powered by Chainlink VRF and user imagination,
 
-Select your adventure and navigate through Draco the Dragon's dungeon, fighting minions and collecting loot controlled by the whims of Draco's magical (VRF) oracle! Once you've acquired the special weapon you can open the door to his lair and, maybe, vanquish him once and for all!
 
-You can find a recording of the game [here](./docs/movie.mp4) if you want to see what it's like in action without running it yourself.
 
 # How it works
-
-See also the [Devpost page](https://devpost.com/software/fantasy-campaign) for this project.
 
 First the user selects and mints a new character (as an NFT), then starts the campaign.
 
@@ -67,7 +71,6 @@ For reasons above and more, many of the build artefacts that are committed to th
 
 # Troubleshooting
 
-Inevitable bugs from writing a game at breakneck speed in our spare time aside, 99% of the problems when running locally come down to:
 
 - Need to reset your MetaMask wallet.
 - Didn't successfully run `contracts:deploy` - probably due to a TypeScript issue where in tsconfig.json `module` needs to be `commonjs` (we should fix this!).
@@ -78,11 +81,5 @@ Inevitable bugs from writing a game at breakneck speed in our spare time aside, 
 - The app stays on the oracle modal. It takes about 30 seconds for the event to be emitted that clears this modal but there's a chance something else went wrong. If it doesn't clear in 30 seconds reload the page.
 - If it _still_ doesn't clear it might be an out of gas error. Edit the localStorage `isRolingDice` to `false` and reload the page. If it happens very frequently, set the gas limit in MetaMask to a much higher value. We could also explore setting the gas limits within the code as overrides in ethersjs to a value that won't run out. 
 
-If you experience any other issues, let us know!
 
-# Thanks
 
-Thanks to [
-Andrija Novakovic](https://github.com/akinovak) for their ultra fast reply in the Iden3 Telegram with some sample code for getting the prover working in the browser... but also thanks to Iden3 in general for all their work.
-
-Thanks also to [Joe Shaw](https://www.thedevteam.co.uk/Knowledge-Base/DungeonMasterJavascript) for the inspiration for the "3D" engine as well as the anons who created the original pixel art.
