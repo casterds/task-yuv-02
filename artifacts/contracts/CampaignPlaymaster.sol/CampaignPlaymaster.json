@@ -1,0 +1,1064 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "CampaignPlaymaster",
+  "sourceName": "contracts/CampaignPlaymaster.sol",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "_tokenId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "_success",
+          "type": "bool"
+        }
+      ],
+      "name": "CampaignEnded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "_tokenId",
+          "type": "uint256"
+        }
+      ],
+      "name": "CampaignStarted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "_tokenId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint8",
+          "name": "_damageDone",
+          "type": "uint8"
+        }
+      ],
+      "name": "CombatSequence",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "_tokenId",
+          "type": "uint256"
+        }
+      ],
+      "name": "TurnCompleted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "_tokenId",
+          "type": "uint256"
+        }
+      ],
+      "name": "TurnSet",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "_tokenId",
+          "type": "uint256"
+        }
+      ],
+      "name": "TurnStarted",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "CampaignItems",
+      "outputs": [
+        {
+          "internalType": "enum FantasyThings.ItemType",
+          "name": "item",
+          "type": "uint8"
+        },
+        {
+          "internalType": "enum FantasyThings.AbilityType",
+          "name": "attr",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "power",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "numUses",
+          "type": "uint8"
+        },
+        {
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_tokenId",
+          "type": "uint256"
+        }
+      ],
+      "name": "abandonCampaign",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_tokenId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_itemId",
+          "type": "uint256"
+        }
+      ],
+      "name": "applyItemSpell",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_tokenId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_abilityIndex",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_target",
+          "type": "uint256"
+        }
+      ],
+      "name": "attackWithAbility",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_tokenId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_itemId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_target",
+          "type": "uint256"
+        }
+      ],
+      "name": "attackWithItem",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "attributesManager",
+      "outputs": [
+        {
+          "internalType": "contract FantasyAttributesManager",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "baseHealth",
+      "outputs": [
+        {
+          "internalType": "uint16",
+          "name": "",
+          "type": "uint16"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "bossFightAvailable",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "campaignInventory",
+      "outputs": [
+        {
+          "internalType": "enum FantasyThings.ItemType",
+          "name": "item",
+          "type": "uint8"
+        },
+        {
+          "internalType": "enum FantasyThings.AbilityType",
+          "name": "attr",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "power",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "numUses",
+          "type": "uint8"
+        },
+        {
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_tokenId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_abilityIndex",
+          "type": "uint256"
+        }
+      ],
+      "name": "castHealAbility",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "enum FantasyThings.AbilityType",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "name": "characterPower",
+      "outputs": [
+        {
+          "internalType": "uint8",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "combatGuaranteedMobIds",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "combatTurnToMobs",
+      "outputs": [
+        {
+          "internalType": "uint16",
+          "name": "health",
+          "type": "uint16"
+        },
+        {
+          "internalType": "uint8",
+          "name": "strength",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "armor",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "physicalblock",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "agility",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "spellpower",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "spellresistance",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "healingpower",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "spawnRate",
+          "type": "uint8"
+        },
+        {
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_tokenId",
+          "type": "uint256"
+        }
+      ],
+      "name": "endExploreLoot",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_tokenId",
+          "type": "uint256"
+        }
+      ],
+      "name": "enterCampaign",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "fantasyCharacters",
+      "outputs": [
+        {
+          "internalType": "contract IERC721Metadata",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_tokenId",
+          "type": "uint256"
+        }
+      ],
+      "name": "generateTurn",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_tokenId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getCurrentCampaignStats",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint16",
+              "name": "health",
+              "type": "uint16"
+            },
+            {
+              "internalType": "uint8",
+              "name": "strength",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "armor",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "physicalblock",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "agility",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "spellpower",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "spellresistance",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "healingpower",
+              "type": "uint8"
+            },
+            {
+              "internalType": "enum FantasyThings.CharacterClass",
+              "name": "class",
+              "type": "uint8"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "enum FantasyThings.AbilityType",
+                  "name": "abilityType",
+                  "type": "uint8"
+                },
+                {
+                  "internalType": "uint8",
+                  "name": "action",
+                  "type": "uint8"
+                },
+                {
+                  "internalType": "string",
+                  "name": "name",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct FantasyThings.Ability[]",
+              "name": "abilities",
+              "type": "tuple[]"
+            }
+          ],
+          "internalType": "struct FantasyThings.CampaignAttributes",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_tokenId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getInventory",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "enum FantasyThings.ItemType",
+              "name": "item",
+              "type": "uint8"
+            },
+            {
+              "internalType": "enum FantasyThings.AbilityType",
+              "name": "attr",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "power",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "numUses",
+              "type": "uint8"
+            },
+            {
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct FantasyThings.Item[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_tokenId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_turnNum",
+          "type": "uint256"
+        }
+      ],
+      "name": "getMobsForTurn",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint16",
+              "name": "health",
+              "type": "uint16"
+            },
+            {
+              "internalType": "uint8",
+              "name": "strength",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "armor",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "physicalblock",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "agility",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "spellpower",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "spellresistance",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "healingpower",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "spawnRate",
+              "type": "uint8"
+            },
+            {
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "enum FantasyThings.AbilityType",
+                  "name": "abilityType",
+                  "type": "uint8"
+                },
+                {
+                  "internalType": "uint8",
+                  "name": "action",
+                  "type": "uint8"
+                },
+                {
+                  "internalType": "string",
+                  "name": "name",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct FantasyThings.Ability[]",
+              "name": "abilities",
+              "type": "tuple[]"
+            }
+          ],
+          "internalType": "struct FantasyThings.Mob[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "lootGuaranteedItemIds",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "mobAttributes",
+      "outputs": [
+        {
+          "internalType": "uint16",
+          "name": "health",
+          "type": "uint16"
+        },
+        {
+          "internalType": "uint8",
+          "name": "strength",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "armor",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "physicalblock",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "agility",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "spellpower",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "spellresistance",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "healingpower",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "spawnRate",
+          "type": "uint8"
+        },
+        {
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "mobIndexAlive",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "numberOfTurns",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "playerNonce",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "playerStatus",
+      "outputs": [
+        {
+          "internalType": "uint16",
+          "name": "health",
+          "type": "uint16"
+        },
+        {
+          "internalType": "uint8",
+          "name": "strength",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "armor",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "physicalblock",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "agility",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "spellpower",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "spellresistance",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "healingpower",
+          "type": "uint8"
+        },
+        {
+          "internalType": "enum FantasyThings.CharacterClass",
+          "name": "class",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "playerTurn",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "turnGuaranteedTypes",
+      "outputs": [
+        {
+          "internalType": "enum FantasyThings.TurnType",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "turnInProgress",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "turnNumMobsAlive",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "turnTypes",
+      "outputs": [
+        {
+          "internalType": "enum FantasyThings.TurnType",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

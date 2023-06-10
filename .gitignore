@@ -23,9 +23,7 @@ yarn-debug.log*
 yarn-error.log*
 
 cache
-artifacts
 factories
-typechain
 
 .env
 

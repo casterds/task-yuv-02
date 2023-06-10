@@ -19,7 +19,8 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "noEmit": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "useUnknownInCatchVariables": false,
   },
   "include": [
     "./scripts",
