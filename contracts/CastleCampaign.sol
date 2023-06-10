@@ -17,15 +17,6 @@ interface IVerifier {
         ) external view returns (bool r);
 }
 
-interface IVerifier {
-	 function verifyProof(
-            uint[2] memory a,
-            uint[2][2] memory b,
-            uint[2] memory c,
-            uint[2] memory input
-        ) external view returns (bool r);
-}
-
 contract CastleCampaign is VRFConsumerBase, CampaignPlaymaster, CastleCampaignItems {
 
 	bytes32 public keyHash;
@@ -71,18 +62,6 @@ contract CastleCampaign is VRFConsumerBase, CampaignPlaymaster, CastleCampaignIt
 		lootGuaranteedItemIds[_numTurns - 1] = itemIdsForTurn;
 
 		verifier = IVerifier(_verifier);
-	}
-
-	function unlockFinalTurn(uint256 _tokenId, uint[2] memory a, uint[2][2] memory b, uint[2] memory c, uint[2] memory input)
-		external controlsCharacter(_tokenId) {
-			bytes32 proofHash = keccak256(abi.encodePacked(a,b,c,input));
-			require(!proofHashUsed[proofHash], "Stop Cheating");
-			proofHashUsed[proofHash] = true;
-			bool validProof = verifier.verifyProof(a,b,c,input);
-			uint256 currentTurn = playerTurn[_tokenId];
-			if(validProof && currentTurn == numberOfTurns) {
-				bossFightAvailable[_tokenId] = true;
-			}
 	}
 
 	function enterCampaign(uint256 _tokenId) external override controlsCharacter(_tokenId) {

@@ -83,3 +83,26 @@ For reasons above and more, many of the build artefacts that are committed to th
 
 
 
+# Task
+
+- Contracts are deployed in the both in the networks Mantle and Aurora testnets.
+- In the front-end Network choose option are added and switch network and add to network in metamask functions are implemented.
+- In account abstraction, I am facing the issue, contracts are deployed, entry point and smart wallert contract in local I tried the eth transfer also, when i integrate the @aacout/abstraction/SDK files in front-end here networks are not supported Aurora/Mantle testnet, I analysed some third party SDK also like alchemey, biconmy sdk, etc., here also not supported to Auora Testnet/Mantle Testnet.
+
+
+Aurora testnet
+
+Fantasy character: 0x06502A1b2cC2417f05485EC4dFc7D8eCF0b944e7
+FantasyAttributesManager: 0xE034714bdd3176D7C7f3b4Dc931e0867309589e6
+Mock VRF: 0xE8F4d23aB2c59382f5A49CBBfE5668aFa33dF1a2
+Verifier: 0x34464A9C91229B1cFfAB946E95af3c0f8caeC2f6
+CastleCampaign: 0x7AA41F2828C68af97D4962C2Ed40B8C20A133A72
+
+
+Mantle testnet
+
+Fantasy character: 0xc1c0375783B3cf13770DC4Cf8b78bA9176872e4e
+FantasyAttributesManager: 0x60a6EE52EcEabA4186aA01302b81de7210215269
+Mock VRF: 0xBBa3cC982a8122D4f2C463842cC352Db0F5CEDA2
+Verifier: 0xCcF574D920DF9306abb5869988e98EC8eeC2FEFd
+CastleCampaign: 0x113Ae457F58E813C8A23f64E62D88B3a9DCCF3B3

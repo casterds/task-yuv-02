@@ -1,4 +1,4 @@
-import { BigNumber, ethers } from "ethers";
+import { BigNumber, ethers, Contract } from "ethers";
 import {
   CharacterAttributes,
   CharacterStatsDictionary,
@@ -6,14 +6,51 @@ import {
   TurnType,
 } from "../types";
 import { JsonRpcSigner } from "@ethersproject/providers/src.ts/json-rpc-provider";
-
 import Web3Modal from "web3modal";
 import { CharacterAttributesStructOutput } from "../../typechain/FantasyAttributesManager";
 import { Contracts } from "../providers/ContractsProvider";
 import { mapCharacterAPIToLocalStats } from "../utils/mapCharacterAPIToLocalStats";
 import { buildContractCallArgs } from "../utils/calculateProof";
+import { InjectedConnector } from "@web3-react/injected-connector";
+import { initialGameData } from "../providers/GameDataProvider";
+import { Sdk, MetaMaskWalletProvider, NetworkNames } from "etherspot";
 
 // --------------------------------------------------------------------------------
+
+export const injected = new InjectedConnector({
+  supportedChainIds: [5001, 1313161555],
+});
+
+const auraro = 1313161555;
+const mantle = 5001;
+
+const auroraParams = [
+  {
+    chainId: `0x${(1313161555).toString(16)}`,
+    rpcUrls: ["https://testnet.aurora.dev/"],
+    chainName: "Aurora Testnet",
+    nativeCurrency: {
+      name: "ETH",
+      symbol: "ETH",
+      decimals: 18,
+    },
+    blockExplorerUrls: ["https://explorer.testnet.aurora.dev/"],
+  },
+];
+
+const mantleParams = [
+  {
+    chainId: `0x${(5001).toString(16)}`,
+    rpcUrls: ["https://rpc.testnet.mantle.xyz"],
+    chainName: "Mantle Testnet",
+    nativeCurrency: {
+      name: "MNT",
+      symbol: "MNT",
+      decimals: 18,
+    },
+    blockExplorerUrls: ["https://explorer.testnet.mantle.xyz/"],
+  },
+];
 
 export const fetchAllMintedCharacters = async ({
   signer,
@@ -166,10 +203,74 @@ export const unlockFinalTurn = async ({
 export const UNLOCK_FINAL_TURN_CACHE_KEY = "unlockFinalTurn";
 
 // --------------------------------------------------------------------------------
-export const fetchSigner = async (): Promise<JsonRpcSigner> => {
+export const fetchSigner = async (setGameData: any): Promise<JsonRpcSigner> => {
   const web3Modal = new Web3Modal();
   const connection = await web3Modal.connect();
   const provider = new ethers.providers.Web3Provider(connection);
+  const network = await provider.getNetwork();
+  const selectedNetwork = localStorage.getItem("network");
+  const chainId = selectedNetwork === "Aurora" ? auraro : mantle;
+  if (chainId !== network.chainId) {
+    const provider = await injected.getProvider();
+    try {
+      await provider.request({
+        method: "wallet_switchEthereumChain",
+        params: [
+          {
+            chainId:
+              selectedNetwork === "Aurora"
+                ? auroraParams[0].chainId
+                : mantleParams[0].chainId,
+          },
+        ],
+      });
+    } catch (switchError) {
+      // This error code indicates that the chain has not been added to MetaMask.
+      if (switchError.code === 4902) {
+        try {
+          await provider.request({
+            method: "wallet_addEthereumChain",
+            params: selectedNetwork === "Aurora" ? auroraParams : mantleParams,
+          });
+        } catch (addError) {
+          setGameData(initialGameData);
+        }
+      } else {
+        setGameData(initialGameData);
+      }
+    }
+  }
+  // try {
+  //   if (!MetaMaskWalletProvider.detect()) {
+  //     console.log("MetaMask not detected");
+  //   }
+  //   const walletProvider = await MetaMaskWalletProvider.connect();
+
+  //   const sdk = new Sdk(walletProvider, {
+  //     networkName: "aurora" as NetworkNames,
+  //     omitWalletProviderNetworkCheck: true,
+  //   });
+  //   await sdk.computeContractAccount();
+  //   const { state } = sdk;
+
+  //   console.log("Smart wallet", state.account);
+  //   console.log("Account balances", await sdk.getAccountBalances());
+  //   const receiver = "0xC32F3C6b77b43765987D69f61405835077a881c8";
+  //   const amtInWei = "100"; //Send 0.5 ETH
+  //   //this method will add the transaction to a batch, which has to be executed later.
+  //   const transaction = await sdk.batchExecuteAccountTransaction({
+  //     to: receiver, //wallet address
+  //     value: amtInWei, //in wei
+  //   });
+  //   console.log(transaction);
+  //   console.log("Estimating transaction");
+  //   const result = await sdk.estimateGatewayBatch();
+  //   console.log("Estimation ", result.estimation);
+  //   const hash = await sdk.submitGatewayBatch();
+  //   console.log("Transaction submitted", hash);
+  // } catch (e) {
+  //   console.log(e);
+  // }
   return provider.getSigner();
 };
 export const FETCH_SIGNER_CACHE_KEY = "fetchSigner";
