@@ -21,7 +21,7 @@ const dropdown = {
   border: "none",
   padding: "5px",
   color: "#fffbfb",
-  fontSize: "9px",
+  margin: "5px",
 };
 var selectedNetwork: any;
 
@@ -52,8 +52,8 @@ export const SplashScreen = () => {
         <Title>Fantasy Campaign</Title>
         <select style={dropdown} onChange={handleChange}>
           <option>select network</option>
-          <option value="Mantle">Mantle Testnet</option>
-          <option value="Aurora">Aurora Testnet</option>
+          <option value="Mantle"> Mantle Testnet </option>
+          <option value="Aurora"> Aurora Testnet </option>
         </select>
         <ButtonText onClick={connect}>~ Press Start ~</ButtonText>
       </AbsoluteCenterFill>

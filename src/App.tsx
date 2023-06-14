@@ -28,13 +28,11 @@ const ClearStorageButton = styled.button`
   top: 10px;
   right: 10px;
   font-size: 18px;
-  color: red;
+  color: white;
   background-color: transparent;
   font-family: inherit;
-  border: none;
   outline: none;
   cursor: pointer;
-  opacity: 0;
 `;
 
 const ClearStorage = () => {
@@ -56,6 +54,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <UserInterfaceListeners />
         <GameScreenContainer>
+          <></>
           <Router />
         </GameScreenContainer>
         <ClearStorage />

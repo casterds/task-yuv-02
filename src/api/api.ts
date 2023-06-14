@@ -17,6 +17,7 @@ import { Sdk, MetaMaskWalletProvider, NetworkNames } from "etherspot";
 
 // --------------------------------------------------------------------------------
 
+var provider: any;
 export const injected = new InjectedConnector({
   supportedChainIds: [5001, 1313161555],
 });
@@ -64,14 +65,17 @@ export const fetchAllMintedCharacters = async ({
   }
   const address = await signer.getAddress();
 
-  const rawTokenIds: BigNumber[] =
-    await contracts.fantasyCharacterContract.getAllCharacters(address);
+  const rawTokenIds: BigNumber[] = await contracts.fantasyCharacterContract
+    .connect(signer)
+    .getAllCharacters(address);
   const tokenIds = rawTokenIds.map(id => id.toNumber());
 
   const characterMap: CharacterStatsDictionary = {};
   const promises = tokenIds.map(async tokenId => {
     const character: CharacterAttributesStructOutput =
-      await contracts.attributesManagerContract.getPlayer(tokenId);
+      await contracts.attributesManagerContract
+        .connect(signer)
+        .getPlayer(tokenId);
     const stats = mapCharacterAPIToLocalStats(character, tokenId);
     characterMap[stats.id] = stats;
   });
@@ -97,9 +101,9 @@ export const createCharacter = async ({
   if (!signer) {
     return null;
   }
-  const tx = await contracts.fantasyCharacterContract.createCharacter(
-    characterId
-  );
+  const tx = await contracts.fantasyCharacterContract
+    .connect(signer)
+    .createCharacter(characterId);
   await tx.wait();
 };
 export const CREATE_CHARACTER_CACHE_KEY = "createCharacter";
@@ -119,14 +123,14 @@ export const enterCampaign = async ({
     return null;
   }
 
-  const turn = await contracts.castleCampaignContract.playerTurn(
-    characterTokenId
-  );
+  const turn = await contracts.castleCampaignContract
+    .connect(signer)
+    .playerTurn(characterTokenId);
   const turnNumber = turn.toNumber();
   if (turnNumber === 0) {
-    const tx = await contracts.castleCampaignContract.enterCampaign(
-      characterTokenId
-    );
+    const tx = await contracts.castleCampaignContract
+      .connect(signer)
+      .enterCampaign(characterTokenId);
     await tx.wait();
   }
 };
@@ -146,9 +150,9 @@ export const generateTurn = async ({
   if (!signer) {
     return null;
   }
-  const tx = await contracts.castleCampaignContract.generateTurn(
-    characterTokenId
-  );
+  const tx = await contracts.castleCampaignContract
+    .connect(signer)
+    .generateTurn(characterTokenId);
   await tx.wait();
 };
 export const GENERATE_TURN_CACHE_KEY = "generateTurn";
@@ -167,10 +171,12 @@ export const moveIsFinal = async ({
   if (!signer) {
     return null;
   }
-  const numberOfTurns = await contracts.castleCampaignContract.numberOfTurns();
-  const playerTurn = await contracts.castleCampaignContract.playerTurn(
-    characterTokenId
-  );
+  const numberOfTurns = await contracts.castleCampaignContract
+    .connect(signer)
+    .numberOfTurns();
+  const playerTurn = await contracts.castleCampaignContract
+    .connect(signer)
+    .playerTurn(characterTokenId);
   return numberOfTurns.toNumber() === playerTurn.toNumber();
 };
 export const MOVE_IS_FINAL_CACHE_KEY = "moveIsFinal";
@@ -194,10 +200,9 @@ export const unlockFinalTurn = async ({
     return null;
   }
   const args = buildContractCallArgs(proof, publicSignals);
-  const tx = await contracts.castleCampaignContract.unlockFinalTurn(
-    characterTokenId,
-    ...args
-  );
+  const tx = await contracts.castleCampaignContract
+    .connect(signer)
+    .unlockFinalTurn(characterTokenId, ...args);
   await tx.wait();
 };
 export const UNLOCK_FINAL_TURN_CACHE_KEY = "unlockFinalTurn";
@@ -205,8 +210,9 @@ export const UNLOCK_FINAL_TURN_CACHE_KEY = "unlockFinalTurn";
 // --------------------------------------------------------------------------------
 export const fetchSigner = async (setGameData: any): Promise<JsonRpcSigner> => {
   const web3Modal = new Web3Modal();
+  await web3Modal.clearCachedProvider();
   const connection = await web3Modal.connect();
-  const provider = new ethers.providers.Web3Provider(connection);
+  provider = new ethers.providers.Web3Provider(connection);
   const network = await provider.getNetwork();
   const selectedNetwork = localStorage.getItem("network");
   const chainId = selectedNetwork === "Aurora" ? auraro : mantle;
@@ -224,6 +230,7 @@ export const fetchSigner = async (setGameData: any): Promise<JsonRpcSigner> => {
           },
         ],
       });
+      window.location.reload();
     } catch (switchError) {
       // This error code indicates that the chain has not been added to MetaMask.
       if (switchError.code === 4902) {
@@ -232,6 +239,7 @@ export const fetchSigner = async (setGameData: any): Promise<JsonRpcSigner> => {
             method: "wallet_addEthereumChain",
             params: selectedNetwork === "Aurora" ? auroraParams : mantleParams,
           });
+          window.location.reload();
         } catch (addError) {
           setGameData(initialGameData);
         }
@@ -271,6 +279,7 @@ export const fetchSigner = async (setGameData: any): Promise<JsonRpcSigner> => {
   // } catch (e) {
   //   console.log(e);
   // }
+  provider = new ethers.providers.Web3Provider(connection);
   return provider.getSigner();
 };
 export const FETCH_SIGNER_CACHE_KEY = "fetchSigner";
@@ -294,11 +303,10 @@ export const attackWithAbility = async ({
     return null;
   }
 
-  await contracts.castleCampaignContract.attackWithAbility(
-    characterTokenId,
-    abilityIndex,
-    target
-  );
+  var hash = await contracts.castleCampaignContract
+    .connect(signer)
+    .attackWithAbility(characterTokenId, abilityIndex, target);
+  await hash.wait();
 };
 export const ATTACK_ABILITY_CACHE_KEY = "attackWithAbility";
 
@@ -320,11 +328,10 @@ export const attackWithItem = async ({
   if (!signer) {
     return null;
   }
-  await contracts.castleCampaignContract.attackWithItem(
-    characterTokenId,
-    itemIndex,
-    target
-  );
+  var hash = await contracts.castleCampaignContract
+    .connect(signer)
+    .attackWithItem(characterTokenId, itemIndex, target);
+  await hash.wait();
 };
 export const ATTACK_ITEM_CACHE_KEY = "attackWithItem";
 
@@ -344,10 +351,9 @@ export const castHealAbility = async ({
   if (!signer) {
     return null;
   }
-  await contracts.castleCampaignContract.castHealAbility(
-    characterTokenId,
-    abilityIndex
-  );
+  await contracts.castleCampaignContract
+    .connect(signer)
+    .castHealAbility(characterTokenId, abilityIndex);
 };
 export const HEAL_ABILITY_CACHE_KEY = "castHealAbility";
 
@@ -365,14 +371,13 @@ export const getMobStats = async ({
   if (!signer) {
     return null;
   }
-  const playerTurn = await contracts.castleCampaignContract.playerTurn(
-    characterTokenId
-  );
+  const playerTurn = await contracts.castleCampaignContract
+    .connect(signer)
+    .playerTurn(characterTokenId);
   const mobStats: CharacterAttributesStructOutput[] =
-    await contracts.castleCampaignContract.getMobsForTurn(
-      characterTokenId,
-      playerTurn
-    );
+    await contracts.castleCampaignContract
+      .connect(signer)
+      .getMobsForTurn(characterTokenId, playerTurn);
   return mobStats.map((stats, index) =>
     mapCharacterAPIToLocalStats({
       ...stats,
@@ -396,15 +401,12 @@ export const getLootStats = async ({
   if (!signer) {
     return null;
   }
-  const playerNonce = await contracts.castleCampaignContract.playerNonce(
-    characterTokenId
-  );
-  const lootStats: Item[] =
-    await contracts.castleCampaignContract.campaignInventory(
-      characterTokenId,
-      playerNonce,
-      characterTokenId
-    );
+  const playerNonce = await contracts.castleCampaignContract
+    .connect(signer)
+    .playerNonce(characterTokenId);
+  const lootStats: Item[] = await contracts.castleCampaignContract
+    .connect(signer)
+    .campaignInventory(characterTokenId, playerNonce, characterTokenId);
   return lootStats;
 };
 export const GET_LOOT_STATS_CACHE_KEY = "getLootStats";
@@ -423,7 +425,9 @@ export const endExploreLoot = async ({
   if (!signer) {
     return null;
   }
-  await contracts.castleCampaignContract.endExploreLoot(characterTokenId);
+  await contracts.castleCampaignContract
+    .connect(signer)
+    .endExploreLoot(characterTokenId);
 };
 export const END_LOOT_CACHE_KEY = "endExploreLoot";
 
@@ -441,9 +445,9 @@ export const getPlayerStats = async ({
   if (!signer) {
     return null;
   }
-  const stats = await contracts.castleCampaignContract.getCurrentCampaignStats(
-    characterTokenId
-  );
+  const stats = await contracts.castleCampaignContract
+    .connect(signer)
+    .getCurrentCampaignStats(characterTokenId);
   return mapCharacterAPIToLocalStats(stats, characterTokenId);
 };
 export const GET_PLAYER_STATS_CACHE_KEY = "getPlayerStats";
@@ -465,10 +469,9 @@ export const getCampaignInventory = async ({
     return null;
   }
 
-  await contracts.castleCampaignContract.campaignInventory(
-    characterTokenId,
-    characterNonce
-  );
+  await contracts.castleCampaignContract
+    .connect(signer)
+    .campaignInventory(characterTokenId, characterNonce);
 };
 export const GET_INVENTORY_CACHE_KEY = "getCampaignInventory";
 
@@ -486,13 +489,12 @@ export const getTurnData = async ({
   if (!signer) {
     return null;
   }
-  const turnNumber = await contracts.castleCampaignContract.playerTurn(
-    characterTokenId
-  );
-  const turnType = await contracts.castleCampaignContract.turnTypes(
-    characterTokenId,
-    turnNumber
-  );
+  const turnNumber = await contracts.castleCampaignContract
+    .connect(signer)
+    .playerTurn(characterTokenId);
+  const turnType = await contracts.castleCampaignContract
+    .connect(signer)
+    .turnTypes(characterTokenId, turnNumber);
   return turnType;
 };
 
@@ -512,8 +514,8 @@ export const getCurrentCampaignStatus = async ({
   if (!signer) {
     return null;
   }
-  await contracts.castleCampaignContract.getCurrentCampaignStatus(
-    characterTokenId
-  );
+  await contracts.castleCampaignContract
+    .connect(signer)
+    .getCurrentCampaignStatus(characterTokenId);
 };
 export const GET_STATUS_CACHE_KEY = "getCurrentCampaignStatus";
