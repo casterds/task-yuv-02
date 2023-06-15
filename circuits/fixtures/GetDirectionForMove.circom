@@ -13,4 +13,4 @@ template GetDirectionForMove() {
   direction <-- dir;
 }
 
-component main {public [x1,y1,x2,y2]} = GetDirectionForMove();
+component main {public [x1,y1,x2,y2]} = GetDirectionForMove(); 
