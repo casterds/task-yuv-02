@@ -10,4 +10,4 @@ export const useGetAvailableCharacters = (): CharacterAttributes[] => {
     }
   }
   return stats;
-};
+}; 
