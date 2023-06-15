@@ -4,4 +4,4 @@ for file in ./original/*.png; do
   base=$(basename "$file")
   echo "Processing $base"
   convert $file -interpolate Integer -filter point -resize "50%" "./scaled/$base"
-done
+done 
