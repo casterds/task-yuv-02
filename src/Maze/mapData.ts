@@ -61,3 +61,4 @@ export const spawnPointCoords: SpawnPointCoords[] = [
   { x: 1, y: 6, type: "Loot", isUsed: false },
   { x: 3, y: 2, type: "Loot", isUsed: false },
 ];
+ 
