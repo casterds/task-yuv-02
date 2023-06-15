@@ -1,4 +1,4 @@
-import {
+import { 
   DoorCoords,
   DoorsDict,
   Position,
