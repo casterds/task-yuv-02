@@ -1,4 +1,4 @@
-{
+{ 
  "protocol": "groth16",
  "curve": "bn128",
  "nPublic": 2,
