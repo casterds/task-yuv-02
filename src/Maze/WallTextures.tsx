@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from "react"; 
 import styled, { StyledComponent } from "styled-components";
 import wallLSide0alt from "../assets/original/wallLSide0alt.png";
 import wallLSide1alt from "../assets/original/wallLSide1alt.png";
