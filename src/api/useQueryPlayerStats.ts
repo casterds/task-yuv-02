@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "react-query"; 
 import { GET_PLAYER_STATS_CACHE_KEY, getPlayerStats } from "./api";
 import { useQuerySigner } from "./useQuerySigner";
 import { useContracts } from "../hooks/useContracts";
