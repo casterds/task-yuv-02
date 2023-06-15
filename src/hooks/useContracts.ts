@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from "react"; 
 import { Contracts, ContractsContext } from "../providers/ContractsProvider";
 
 export const useContracts = (): Contracts => {
