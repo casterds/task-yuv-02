@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "react-query"; 
 import { MOVE_IS_FINAL_CACHE_KEY, moveIsFinal } from "./api";
 import { useQuerySigner } from "./useQuerySigner";
 import { useContracts } from "../hooks/useContracts";
