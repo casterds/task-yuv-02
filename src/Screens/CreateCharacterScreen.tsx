@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from "react"; 
 import { GameModes } from "../types";
 import styled from "styled-components";
 import { useGetAvailableCharacters } from "../hooks/useGetAvailableCharacters";
