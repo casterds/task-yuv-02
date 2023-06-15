@@ -7,4 +7,4 @@ type WalletContextType = {
 
 export const WalletContext = React.createContext<WalletContextType | undefined>(
   undefined
-);
+); 
