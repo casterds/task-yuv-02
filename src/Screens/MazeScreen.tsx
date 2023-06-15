@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from "react"; 
 import { doorTextureMaps } from "../Maze/DoorTextures";
 import { wallTextureMaps } from "../Maze/WallTextures";
 import { Ceiling, Floor } from "../Maze/EnvironmentTextures";
