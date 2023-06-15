@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from "react"; 
 import { CSSProperties, ReactElement } from "react";
 import { circuitWalls } from "./mapData";
 import styled from "styled-components";
