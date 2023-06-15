@@ -1,4 +1,4 @@
-import * as snarkjs from "snarkjs";
+import * as snarkjs from "snarkjs"; 
 
 import verificationKey from "../../circuits/verification_key.json";
 import { genProof } from "./snarkUtils";
