@@ -1,4 +1,4 @@
-import { CharacterAttributesStructOutput } from "../../typechain/FantasyAttributesManager";
+import { CharacterAttributesStructOutput } from "../../typechain/FantasyAttributesManager"; 
 import { characterStats } from "../constants";
 import { CharacterAttributes } from "../types";
 
