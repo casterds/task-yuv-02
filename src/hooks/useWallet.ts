@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from "react"; 
 import { WalletContext } from "../providers/WalletProvider";
 
 export const useWallet = () => {
