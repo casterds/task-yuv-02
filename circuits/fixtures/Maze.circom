@@ -12,4 +12,4 @@ template Maze() {
   }
 }
 
-component main = Maze();
+component main = Maze(); 
