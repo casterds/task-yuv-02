@@ -21,6 +21,6 @@ function getDirectionForMove(x1, y1, x2, y2) {
   }
   if (yDiff == 1) {
     direction = 2;
-  }
+  } 
   return direction;
 }
