@@ -28,6 +28,6 @@ function isTileOpenForSide(tileCode, side) {
     if (allowedFromType == tileCode) {
       s = 1;
     }
-  }
+  } 
   return s;
 }
