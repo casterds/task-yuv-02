@@ -1,5 +1,5 @@
 const { exec } = require("child_process");
-const path = require("path");
+const path = require("path"); 
 
 const CIRCUIT_DIR = path.resolve(__dirname, "../circuits/circuit.circom");
 const CONTRACT_DIR = path.resolve(__dirname, "../contracts");
