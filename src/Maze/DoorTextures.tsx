@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from "react"; 
 import styled, { StyledComponent } from "styled-components";
 import doorFront1 from "../assets/scaled/doorFront1.png";
 import doorFront2 from "../assets/scaled/doorFront2.png";
