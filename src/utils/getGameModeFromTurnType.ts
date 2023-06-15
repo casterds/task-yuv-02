@@ -9,4 +9,4 @@ export const getGameModeFromTurnType = (
     return GameModes.InCombat;
   }
   return null;
-};
+}; 
