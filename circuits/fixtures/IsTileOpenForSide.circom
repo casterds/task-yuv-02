@@ -18,7 +18,7 @@ template IsTileOpenForSide() {
 
   var s = isTileOpenForSide(tileCode, side);
   success <-- s;
-}
+} 
 
 
 component main {public [tileCode, side]} = IsTileOpenForSide();
