@@ -1,4 +1,4 @@
-import { rotate } from "./rotate";
+import { rotate } from "./rotate"; 
 import { round } from "./round";
 import { GameData, Position, GameModes } from "../types";
 import { generateDoorCollisions, wallsDict } from "./generateCollisionMaps";
