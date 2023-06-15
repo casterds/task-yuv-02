@@ -6,4 +6,4 @@ function getTileCodeFromCoords(x,y) {
   var maze[7][7] = getMaze();
   var tileCode = maze[y][x];
   return tileCode;
-}
+} 
