@@ -16,3 +16,4 @@ template AssertNoTeleport() {
     eq.in[1] <== 1;
     out <== tmp2;
 }
+
