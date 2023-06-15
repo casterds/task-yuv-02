@@ -12,4 +12,4 @@ template TileCodeFromCoords() {
 }
 
 
-component main {public [x,y]} = TileCodeFromCoords();
+component main {public [x,y]} = TileCodeFromCoords(); 
