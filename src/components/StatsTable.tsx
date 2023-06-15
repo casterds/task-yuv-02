@@ -6,7 +6,7 @@ const Table = styled.table`
   border: 1px solid #523c31;
   margin-left: 3px;
 `;
-const Td = styled.td`
+const Td = styled.td` 
   font-size: 5px;
   padding: 1px;
 `;
