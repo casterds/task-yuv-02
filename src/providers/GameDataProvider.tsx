@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from "react"; 
 import { GameData, GameModes } from "../types";
 import { useEffect } from "react";
 import { spawnPointCoords } from "../Maze/mapData";
