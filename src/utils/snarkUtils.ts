@@ -1,4 +1,4 @@
-import * as snarkjs from "snarkjs";
+import * as snarkjs from "snarkjs"; 
 import builder from "../../circuits/circuit_js/witness_calculator";
 
 export const genWnts = async (
