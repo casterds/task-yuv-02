@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from "react"; 
 import { GameDataContext } from "../providers/GameDataProvider";
 
 export const useGameData = () => {
