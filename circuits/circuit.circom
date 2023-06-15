@@ -75,4 +75,5 @@ template Game(N) {
   out[1] <-- reachedEnd;
 }
 
+
 component main = Game(200);
