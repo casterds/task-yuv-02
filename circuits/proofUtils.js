@@ -1,4 +1,4 @@
-const bigInt = require("big-integer");
+const bigInt = require("big-integer"); 
 
 const { groth16 } = require("snarkjs");
 const fs = require("fs");
