@@ -1,4 +1,4 @@
-import { CharacterAttributes, CharacterClass } from "./types";
+import { CharacterAttributes, CharacterClass } from "./types"; 
 import barbarianFront from "./assets/scaled/barbarian_select.png";
 import barbarianBack from "./assets/scaled/barbarian_back.png";
 import shamanFront from "./assets/scaled/shaman_front.png";
