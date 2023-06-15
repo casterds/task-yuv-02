@@ -1,4 +1,4 @@
-import { Position } from "../types";
+import { Position } from "../types"; 
 import { useGameData } from "./useGameData";
 import { useMemo } from "react";
 
