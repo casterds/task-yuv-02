@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -e 
 
 echoerr() {
   echo "$@" 1>&2
