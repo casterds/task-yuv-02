@@ -1,4 +1,4 @@
-import { rotate } from "../utils/rotate";
+import { rotate } from "../utils/rotate"; 
 import { round } from "../utils/round";
 import { wallCoords } from "../Maze/mapData";
 import { usePosition } from "./usePosition";
