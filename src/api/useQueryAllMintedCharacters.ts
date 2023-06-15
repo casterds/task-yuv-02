@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "react-query"; 
 import { FETCH_MINTED_CACHE_KEY, fetchAllMintedCharacters } from "./api";
 import { useQuerySigner } from "./useQuerySigner";
 import { useContracts } from "../hooks/useContracts";
