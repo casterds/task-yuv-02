@@ -13,4 +13,4 @@ template AssertNoTeleportTest() {
   out <== a.out;
 }
 
-component main {public [direction, enabled]} = AssertNoTeleportTest();
+component main {public [direction, enabled]} = AssertNoTeleportTest(); 
